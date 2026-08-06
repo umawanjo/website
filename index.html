@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMAWANJO | Boys' Secondary School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#123a6b;
+    --navy-dark:#0c2c53;
+    --green:#2ea767;
+    --green-dark:#1f8b53;
+    --cream:#f7f8fa;
+    --ink:#16233a;
+    --muted:#5c6b83;
+    --gold:#e0a63a;
+    --line:#e6eaf1;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:#fff;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif;}
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1200px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;}
+  .brand .logo{
+    width:40px;height:40px;border-radius:10px;
+    background:linear-gradient(135deg,var(--navy),var(--green));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;
+  }
+  .brand-text{line-height:1.2;}
+  .brand-text .sub{font-size:11px;color:var(--muted);font-weight:500;}
+  .nav-links{display:flex;gap:28px;font-weight:500;font-size:14.5px;color:var(--ink);}
+  .nav-links a{opacity:.85;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;color:var(--green-dark);}
+  .nav-cta{
+    background:var(--navy);color:#fff;padding:10px 20px;border-radius:30px;font-weight:600;font-size:14px;
+  }
+  @media(max-width:900px){.nav-links{display:none;}}
+
+  /* HERO */
+  .hero{
+    position:relative;height:78vh;min-height:520px;
+    background:
+      linear-gradient(180deg, rgba(10,25,50,.15) 0%, rgba(8,20,42,.55) 100%),
+      url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop')
+      center/cover no-repeat;
+    display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;
+  }
+  .hero-content{max-width:720px;padding:0 24px;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.14);backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.35);
+    padding:8px 18px;border-radius:30px;font-size:12.5px;font-weight:600;letter-spacing:.06em;
+    margin-bottom:22px;
+  }
+  .hero h1{font-size:52px;font-weight:800;margin-bottom:14px;letter-spacing:-.01em;}
+  .hero p{font-size:17px;color:rgba(255,255,255,.9);font-weight:400;}
+  .hero-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);
+    color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;
+  }
+  .hero-arrow.left{left:24px;} .hero-arrow.right{right:24px;}
+  .hero-dot{
+    position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.5);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;
+  }
+  @media(max-width:640px){.hero h1{font-size:34px;}.hero{height:70vh;}}
+
+  /* SECTION LABELS */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);padding:7px 18px;border-radius:30px;
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;color:var(--navy);
+    margin-bottom:18px;
+  }
+  .section{padding:88px 0;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 56px auto;}
+  .section-head h2{font-size:36px;font-weight:800;color:var(--ink);margin-bottom:14px;}
+  .section-head h2 .accent{color:var(--green-dark);}
+  .section-head p{color:var(--muted);font-size:15.5px;}
+
+  /* ABOUT WITH ANIMATIONS */
+  .about-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+  }
+  
+  /* Container ya picha */
+  .about-img{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  
+  /* Picha yenyewe na transition */
+  .about-img img{
+    border-radius:var(--radius);
+    transition: transform 0.5s ease;
+    width: 100%;
+  }
+  
+  /* Zoom in effect */
+  .about-img:hover img{
+    transform: scale(1.08);
+  }
+
+  /* Kibandiko (Badge) kinachoelea */
+  .about-tag{
+    position:absolute;bottom:16px;left:16px;
+    background:#fff;padding:9px 16px;border-radius:10px;
+    font-size:13px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.12);
+    animation: floatBadge 3s ease-in-out infinite;
+  }
+
+  /* Keyframes kwa ajili ya mwendo wa kuelea */
+  @keyframes floatBadge {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .about-card{
+    background:var(--cream);border:1px solid var(--line);border-radius:14px;
+    padding:22px 24px;margin-bottom:16px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .about-card .icon{
+    width:38px;height:38px;border-radius:10px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+    background:#fff;border:1px solid var(--line);
+  }
+  .about-card h4{font-size:16px;margin-bottom:6px;}
+  .about-card p{font-size:13.8px;color:var(--muted);}
+  .btn-navy{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--navy);color:#fff;padding:13px 22px;border-radius:10px;
+    font-weight:600;font-size:14.5px;border:none;cursor:pointer;margin-top:6px;
+  }
+
+  /* ADMISSIONS */
+  .admissions{background:var(--cream);}
+  .adm-card{
+    background:#fff;border:1px solid var(--line);border-radius:20px;
+    max-width:820px;margin:0 auto;padding:36px;
+    box-shadow:0 20px 50px rgba(18,58,107,.06);
+  }
+  .adm-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .adm-box{
+    border:1px solid var(--line);border-radius:14px;padding:22px;
+  }
+  .adm-box .icon{
+    width:38px;height:38px;border-radius:10px;margin-bottom:14px;
+    display:flex;align-items:center;justify-content:center;font-size:17px;
+    background:var(--cream);
+  }
+  .adm-box h4{font-size:16px;margin-bottom:8px;}
+  .adm-box p{font-size:13.5px;color:var(--muted);margin-bottom:14px;}
+  .pill{
+    display:inline-block;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;
+  }
+  .pill.blue{background:#e8f0fd;color:var(--navy);}
+  .pill.green{background:#e5f7ec;color:var(--green-dark);}
+  .adm-three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px;}
+  .stat-box{
+    border-radius:12px;padding:18px;text-align:center;
+  }
+  .stat-box .icon{font-size:20px;margin-bottom:8px;}
+  .stat-box h5{font-size:13.5px;font-weight:700;margin-bottom:4px;}
+  .stat-box span{font-size:12px;color:var(--muted);}
+  .stat-box.gray{background:#eef1f6;}
+  .stat-box.green{background:#e5f7ec;color:var(--green-dark);}
+  .stat-box.green span{color:var(--green-dark);opacity:.85;}
+  .stat-box.gold{background:#fdf3e0;color:#a5720b;}
+  .stat-box.gold span{color:#a5720b;opacity:.85;}
+  .cta-gradient{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(90deg,var(--navy),var(--green));
+    color:#fff;padding:16px;border-radius:12px;font-weight:700;font-size:15px;
+    border:none;width:100%;cursor:pointer;
+  }
+  @media(max-width:700px){.adm-two,.adm-three{grid-template-columns:1fr;}}
+
+  /* TESTIMONIALS */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .test-card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;
+    box-shadow:0 8px 24px rgba(18,58,107,.05);
+  }
+  .test-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+  .quote-mark{
+    width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    font-size:16px;color:#fff;font-weight:800;
+  }
+  .test-person{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+  .avatar{
+    width:38px;height:38px;border-radius:50%;background:var(--cream);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:16px;border:1px solid var(--line);
+  }
+  .test-person h5{font-size:14.5px;}
+  .test-person span{font-size:12.5px;color:var(--muted);}
+  .stars{color:var(--gold);font-size:13px;margin-bottom:10px;letter-spacing:2px;}
+  .test-card p{font-size:13.8px;color:var(--muted);font-style:italic;}
+  @media(max-width:900px){.test-grid{grid-template-columns:1fr;}}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;}}
+
+  /* FOOTER */
+  footer{background:var(--navy-dark);color:#cfd9ec;padding:64px 0 0 0;}
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:44px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .foot-brand .logo{
+    width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--navy));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;
+  }
+  .foot-brand-text{line-height:1.2;}
+  .foot-brand-text strong{color:#fff;font-size:15px;}
+  .foot-brand-text span{font-size:11px;color:#9fb0cc;}
+  footer p.tag{font-size:13.5px;color:#a9b8d4;margin-bottom:16px;}
+  .foot-social{display:flex;gap:10px;}
+  .foot-social a{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  footer h6{color:#fff;font-size:14.5px;margin-bottom:16px;}
+  footer ul li{margin-bottom:10px;font-size:13.8px;color:#aebbd6;}
+  footer ul li a:hover{color:#fff;}
+  .foot-contact li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#aebbd6;margin-bottom:14px;}
+  .bottom-bar{
+    text-align:center;padding:22px 0;font-size:12.5px;color:#8496b8;
+  }
+  @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.foot-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="logo">U</div>
+      <div class="brand-text">
+        UMAWANJO<br>
+        <span class="sub">Boys' Secondary School</span>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#home">Mwanzo</a>
+      <a href="#about">Kuhusu Sisi</a>
+      <a href="#academics">Taaluma</a>
+      <a href="#admissions">Udahili</a>
+      <a href="#contact">Mawasiliano</a>
+    </nav>
+    <a href="#admissions" class="nav-cta">Omba Nafasi</a>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-arrow left">&#8249;</div>
+  <div class="hero-content">
+    <div class="hero-badge">🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA</div>
+    <h1>Elimu, Nidhamu, na Maadili</h1>
+    <p>Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.</p>
+  </div>
+  <div class="hero-arrow right">&#8250;</div>
+  <div class="hero-dot">❙</div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">🛡️ KUHUSU UMAWANJO BOYS 🛡️</span>
+      <h2>Historia <span class="accent">Yetu</span></h2>
+      <p>Umawanjo Boys ni zaidi ya shule, ni kituo kinacholenga kukuza vipaji, nidhamu ya hali ya juu, na uwezo wa kila kijana kwa maisha yenye mafanikio.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=900&auto=format&fit=crop" alt="Jengo la Umawanjo Boys School">
+        <div class="about-tag">🌿 Elimu bora kwa vijana</div>
+      </div>
+      <div>
+        <div class="about-card">
+          <div class="icon">✨</div>
+          <div>
+            <h4>Dhamira Yetu</h4>
+            <p>Kutoa elimu ya sekondari inayochochea fikra pevu, uvumbuzi, na mafanikio ya kitaaluma kwa wanafunzi wetu wote.</p>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="icon">🎯</div>
+          <div>
+            <h4>Maono Yetu</h4>
+            <p>Kuwa kituo bora cha elimu ya sekondari, kikimwandaa kijana anayefanikiwa kitaaluma, mwenye maadili na uwezo wa kulitumikia taifa.</p>
+          </div>
+        </div>
+        <button class="btn-navy">📘 Jifunze Zaidi Kuhusu Umawanjo</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section admissions" id="admissions">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">👤 KARIBU 2026 👥</span>
+      <h2><span class="accent">Nafasi Zilizopo</span> kwa Wanafunzi Wapya</h2>
+      <p>Jiunge nasi kwa elimu ya sekondari yenye ubora katika mazingira yanayojenga nidhamu na ufaulu. Usajili unaendelea!</p>
+    </div>
+
+    <div class="adm-card">
+      <div class="adm-two">
+        <div class="adm-box">
+          <div class="icon">📖</div>
+          <h4>O-Level (Kidato cha 1 - 4)</h4>
+          <p>Msingi thabiti wa elimu ya sekondari ukilenga masomo ya sayansi, biashara na sanaa kwa mtaala wa kitaifa.</p>
+          <span class="pill blue">Kidato cha I hadi IV</span>
+        </div>
+        <div class="adm-box">
+          <div class="icon">🎓</div>
+          <h4>A-Level (Kidato cha 5 - 6)</h4>
+          <p>Elimu ya kidato cha tano na sita yenye michepuo mbalimbali, ikiwaandaa vijana kwa elimu ya juu.</p>
+          <span class="pill green">Kidato cha V na VI</span>
+        </div>
+      </div>
+
+      <div class="adm-three">
+        <div class="stat-box gray">
+          <div class="icon">🗓️</div>
+          <h5>Muda wa Usajili</h5>
+          <span>Inaendelea Sasa - Jan 2026</span>
+        </div>
+        <div class="stat-box green">
+          <div class="icon">💳</div>
+          <h5>Malipo ya Karo</h5>
+          <span>Yanapatikana kwa Awamu</span>
+        </div>
+        <div class="stat-box gold">
+          <div class="icon">🏫</div>
+          <h5>Shule Inafunguliwa</h5>
+          <span>Januari 2026</span>
+        </div>
+      </div>
+
+      <button class="cta-gradient">👥 Omba Nafasi Sasa</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">⭐ USHUHUDA ⭐</span>
+      <h2>Maoni ya <span class="accent">Wanafunzi na Wazazi</span></h2>
+      <p>Mafanikio ya vijana wetu na ushirikiano tunaopata kutoka kwa wazazi ndio uthibitisho wetu mkuu wa ubora wa elimu tunayotoa.</p>
+    </div>
+
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-top">
+          <div class="test-person">
+            <div class="avatar">👤</div>
+            <div>
+              <h5>Baraka J.</h5>
+              <span>Mwanafunzi - Kidato cha 4</span>
+            </div>
+          </div>
+          <div class="quote-mark" style="background:var(--gold);">”</div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p>"Mazingira ya Umawanjo Boys yanatupa utulivu wa kusoma. Walimu wako karibu nasi usiku na mchana kuhakikisha tunaelewa."</p>
+      </div>
+
+      <div class="test-card">
+        <div class="test-top">
+          <div class="test-person">
+            <div class="avatar">👤</div>
+            <div>
+              <h5>Paulo M.</h5>
+              <span>Mzazi wa Mwanafunzi</span>
+            </div>
+          </div>
+          <div class="quote-mark" style="background:var(--green);">”</div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p>"Nimeona mabadiliko makubwa sana ya kinidhamu na ufaulu tangu nimlete kijana wangu hapa. Shule ina usimamizi thabiti sana."</p>
+      </div>
+
+      <div class="test-card">
+        <div class="test-top">
+          <div class="test-person">
+            <div class="avatar">👤</div>
+            <div>
+              <h5>Mzee Chacha.</h5>
+              <span>Mzazi wa mwanafunzi</span>
+            </div>
+          </div>
+          <div class="quote-mark" style="background:var(--navy);">”</div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p>"Umawanjo inajenga vijana wanaojitegemea. Ufuatiliaji wao wa kitaaluma unanipa amani kama mzazi kwamba mtoto wangu yuko mikono salama."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <div class="logo">U</div>
+          <div class="foot-brand-text">
+            <strong>UMAWANJO</strong><br>
+            <span>Boys' Secondary School</span>
+          </div>
+        </div>
+        <p class="tag">Elimu, Nidhamu, na Maadili.</p>
+        <div class="foot-social">
+          <a href="#">f</a><a href="#">𝕏</a><a href="#">◎</a><a href="#">in</a>
+        </div>
+      </div>
+      <div>
+        <h6>Viungo Muhimu</h6>
+        <ul>
+          <li><a href="#home">Mwanzo</a></li>
+          <li><a href="#about">Kuhusu Sisi</a></li>
+          <li><a href="#academics">Taaluma (Matokeo)</a></li>
+          <li><a href="#admissions">Udahili</a></li>
+          <li><a href="#contact">Mawasiliano</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Programu Zetu</h6>
+        <ul>
+          <li><a href="#">O-Level (Kidato cha 1-4)</a></li>
+          <li><a href="#">A-Level (Kidato cha 5-6)</a></li>
+          <li><a href="#">Michezo & Sanaa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Mawasiliano</h6>
+        <ul class="foot-contact">
+          <li>📍 Ludewa, Njombe, Tanzania</li>
+          <li>📞 +255 765 883 980<br>+255 737 663 181</li>
+          <li>✉️ info@umawanjoboys.ac.tz</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-bar">Imebuniwa na MifumoTech</div>
+  </div>
+</footer>
+
+</body>
+</html>
