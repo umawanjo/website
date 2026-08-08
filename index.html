@@ -111,26 +111,22 @@
     display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
   }
   
-  /* Container ya picha */
   .about-img{
     position:relative;
     border-radius:var(--radius);
     overflow:hidden;
   }
   
-  /* Picha yenyewe na transition */
   .about-img img{
     border-radius:var(--radius);
     transition: transform 0.5s ease;
     width: 100%;
   }
   
-  /* Zoom in effect */
   .about-img:hover img{
     transform: scale(1.08);
   }
 
-  /* Kibandiko (Badge) kinachoelea */
   .about-tag{
     position:absolute;bottom:16px;left:16px;
     background:#fff;padding:9px 16px;border-radius:10px;
@@ -138,7 +134,6 @@
     animation: floatBadge 3s ease-in-out infinite;
   }
 
-  /* Keyframes kwa ajili ya mwendo wa kuelea */
   @keyframes floatBadge {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -383,58 +378,44 @@
 
     <div class="test-grid">
       <?php
-      // 1. Connection ya Database (Badilisha hizi taarifa kulingana na server yako)
-      $host = 'localhost';
-      $db   = 'jina_la_database';
-      $user = 'jina_la_user';
-      $pass = 'password_yako';
+      // Iite connection yako kutoka kwenye config.php
+      include 'config.php';
 
-      try {
-          $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
-          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          
-          // 2. Vuta maoni kutoka kwenye database (Unaweza ku-limit 3 za mwisho)
-          $stmt = $pdo->query("SELECT * FROM testimonials ORDER BY id DESC LIMIT 3");
-          $testimonials = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      // Vuta maoni kutoka kwenye database kwa kutumia MySQLi
+      $sql = "SELECT * FROM testimonials ORDER BY id DESC LIMIT 3";
+      $result = $conn->query($sql);
 
-          // 3. Loop (Zungusha) kutengeneza kadi za HTML
-          if ($testimonials) {
-              foreach ($testimonials as $row) {
-                  $jina = htmlspecialchars($row['jina']);
-                  $cheo = htmlspecialchars($row['cheo']);
-                  $maoni = htmlspecialchars($row['maoni']);
-                  $rangi = htmlspecialchars($row['rangi_nukuu']);
-                  ?>
-                  
-                  <div class="test-card">
-                    <div class="test-top">
-                      <div class="test-person">
-                        <div class="avatar">👤</div>
-                        <div>
-                          <h5><?php echo $jina; ?></h5>
-                          <span><?php echo $cheo; ?></span>
-                        </div>
-                      </div>
-                      <div class="quote-mark" style="background:<?php echo $rangi; ?>;">”</div>
+      // Zungusha kutengeneza kadi za HTML
+      if ($result && $result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+              $jina = htmlspecialchars($row['jina']);
+              $cheo = htmlspecialchars($row['cheo']);
+              $maoni = htmlspecialchars($row['maoni']);
+              $rangi = htmlspecialchars($row['rangi_nukuu']);
+              ?>
+              
+              <div class="test-card">
+                <div class="test-top">
+                  <div class="test-person">
+                    <div class="avatar">👤</div>
+                    <div>
+                      <h5><?php echo $jina; ?></h5>
+                      <span><?php echo $cheo; ?></span>
                     </div>
-                    <div class="stars">★★★★★</div>
-                    <p>"<?php echo $maoni; ?>"</p>
                   </div>
+                  <div class="quote-mark" style="background:<?php echo $rangi; ?>;">”</div>
+                </div>
+                <div class="stars">★★★★★</div>
+                <p>"<?php echo $maoni; ?>"</p>
+              </div>
 
-                  <?php
-              }
-          } else {
-              // Kama hakuna data kwenye table, onyesha ujumbe au data za kuanzia
-              echo "<p style='grid-column: 1 / -1; text-align: center; color: var(--muted);'>Hakuna maoni yaliyowekwa kwa sasa.</p>";
+              <?php
           }
-
-      } catch (PDOException $e) {
-          // Ikiwa kuna shida ya ku-connect, onyesha kosa kiufundi
-          echo "<p style='grid-column: 1 / -1; text-align: center; color: red;'>Tatizo la kuunganisha Database: " . $e->getMessage() . "</p>";
+      } else {
+          echo "<p style='grid-column: 1 / -1; text-align: center; color: var(--muted);'>Hakuna maoni yaliyowekwa kwa sasa.</p>";
       }
       ?>
     </div>
-
   </div>
 </section>
 
