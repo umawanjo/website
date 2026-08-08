@@ -376,46 +376,11 @@
       <p>Mafanikio ya vijana wetu na ushirikiano tunaopata kutoka kwa wazazi ndio uthibitisho wetu mkuu wa ubora wa elimu tunayotoa.</p>
     </div>
 
-    <div class="test-grid">
-      <?php
-      // Iite connection yako kutoka kwenye config.php
-      include 'config.php';
-
-      // Vuta maoni kutoka kwenye database kwa kutumia MySQLi
-      $sql = "SELECT * FROM testimonials ORDER BY id DESC LIMIT 3";
-      $result = $conn->query($sql);
-
-      // Zungusha kutengeneza kadi za HTML
-      if ($result && $result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-              $jina = htmlspecialchars($row['jina']);
-              $cheo = htmlspecialchars($row['cheo']);
-              $maoni = htmlspecialchars($row['maoni']);
-              $rangi = htmlspecialchars($row['rangi_nukuu']);
-              ?>
-              
-              <div class="test-card">
-                <div class="test-top">
-                  <div class="test-person">
-                    <div class="avatar">👤</div>
-                    <div>
-                      <h5><?php echo $jina; ?></h5>
-                      <span><?php echo $cheo; ?></span>
-                    </div>
-                  </div>
-                  <div class="quote-mark" style="background:<?php echo $rangi; ?>;">”</div>
-                </div>
-                <div class="stars">★★★★★</div>
-                <p>"<?php echo $maoni; ?>"</p>
-              </div>
-
-              <?php
-          }
-      } else {
-          echo "<p style='grid-column: 1 / -1; text-align: center; color: var(--muted);'>Hakuna maoni yaliyowekwa kwa sasa.</p>";
-      }
-      ?>
+    <!-- Hapa ndipo maoni yataingia kwa njia ya JavaScript -->
+    <div class="test-grid" id="testimonials-container">
+      <p style='grid-column: 1 / -1; text-align: center; color: var(--muted);'>Inapakia maoni kutoka kwenye kanzidata...</p>
     </div>
+
   </div>
 </section>
 
@@ -465,6 +430,52 @@
     <div class="bottom-bar">Imebuniwa na MifumoTech</div>
   </div>
 </footer>
+
+<!-- SCRIPT YA KUUNGANISHA GITHUB NA CPANEL YAKO -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('testimonials-container');
+    
+    // Hii ni URL ya faili lako uliloweka kule cPanel
+    const apiUrl = 'https://umawanjo.ac.tz/umawanjo/api.php'; 
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if(data.length > 0) {
+                let htmlContent = '';
+                data.forEach(item => {
+                    // Weka default rangi kama haipo kwenye database
+                    let rangi = item.rangi_nukuu ? item.rangi_nukuu : 'var(--gold)';
+                    
+                    htmlContent += `
+                      <div class="test-card">
+                        <div class="test-top">
+                          <div class="test-person">
+                            <div class="avatar">👤</div>
+                            <div>
+                              <h5>${item.jina}</h5>
+                              <span>${item.cheo}</span>
+                            </div>
+                          </div>
+                          <div class="quote-mark" style="background:${rangi};">”</div>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                        <p>"${item.maoni}"</p>
+                      </div>
+                    `;
+                });
+                container.innerHTML = htmlContent;
+            } else {
+                container.innerHTML = `<p style='grid-column: 1 / -1; text-align: center; color: var(--muted);'>Hakuna maoni yaliyowekwa kwa sasa.</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Kuna tatizo la kuwasiliana na cPanel:', error);
+            container.innerHTML = `<p style='grid-column: 1 / -1; text-align: center; color: red;'>Imeshindwa kupakia maoni kwa sasa.</p>`;
+        });
+});
+</script>
 
 </body>
 </html>
