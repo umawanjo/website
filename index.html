@@ -67,7 +67,7 @@
       url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop')
       center/cover no-repeat;
     display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;
-    transition: background 0.8s ease-in-out; /* Kuweka muonekano mwororo wakati picha inabadilika */
+    transition: background 0.8s ease-in-out;
   }
   .hero-content{max-width:720px;padding:0 24px;}
   .hero-badge{
@@ -114,19 +114,19 @@
   .about-grid{
     display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
   }
-  
+
   .about-img{
     position:relative;
     border-radius:var(--radius);
     overflow:hidden;
   }
-  
+
   .about-img img{
     border-radius:var(--radius);
     transition: transform 0.5s ease;
     width: 100%;
   }
-  
+
   .about-img:hover img{
     transform: scale(1.08);
   }
@@ -170,7 +170,13 @@
   }
   .adm-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
   .adm-box{
-    border:1px solid var(--line);border-radius:14px;padding:22px;
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  }
+  .adm-box .adm-img{
+    width:100%;height:150px;object-fit:cover;
+  }
+  .adm-box .adm-box-body{
+    padding:22px;
   }
   .adm-box .icon{
     width:38px;height:38px;border-radius:10px;margin-bottom:14px;
@@ -218,8 +224,10 @@
   .test-person{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
   .avatar{
     width:38px;height:38px;border-radius:50%;background:var(--cream);
-    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:16px;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    font-size:16px;border:1px solid var(--line);overflow:hidden;
   }
+  .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
   .test-person h5{font-size:14.5px;}
   .test-person span{font-size:12.5px;color:var(--muted);}
   .stars{color:var(--gold);font-size:13px;margin-bottom:10px;letter-spacing:2px;}
@@ -281,16 +289,14 @@
 </header>
 
 <section class="hero" id="home">
-  <!-- Tumeongeza vitambulisho (IDs) kwenye mishale ili JS iweze kuzitambua -->
   <div class="hero-arrow left" id="slide-left">&#8249;</div>
-  
+
   <div class="hero-content">
     <div class="hero-badge">🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA</div>
     <h1>Elimu, Nidhamu, na Maadili</h1>
     <p>Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.</p>
   </div>
-  
-  <!-- Tumeongeza kitambulisho (ID) hapa pia -->
+
   <div class="hero-arrow right" id="slide-right">&#8250;</div>
   <div class="hero-dot">❙</div>
 </section>
@@ -340,16 +346,22 @@
     <div class="adm-card">
       <div class="adm-two">
         <div class="adm-box">
-          <div class="icon">📖</div>
-          <h4>O-Level (Kidato cha 1 - 4)</h4>
-          <p>Msingi thabiti wa elimu ya sekondari ukilenga masomo ya sayansi, biashara na sanaa kwa mtaala wa kitaifa.</p>
-          <span class="pill blue">Kidato cha I hadi IV</span>
+          <img class="adm-img" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop" alt="Wanafunzi wa O-Level darasani">
+          <div class="adm-box-body">
+            <div class="icon">📖</div>
+            <h4>O-Level (Kidato cha 1 - 4)</h4>
+            <p>Msingi thabiti wa elimu ya sekondari ukilenga masomo ya sayansi, biashara na sanaa kwa mtaala wa kitaifa.</p>
+            <span class="pill blue">Kidato cha I hadi IV</span>
+          </div>
         </div>
         <div class="adm-box">
-          <div class="icon">🎓</div>
-          <h4>A-Level (Kidato cha 5 - 6)</h4>
-          <p>Elimu ya kidato cha tano na sita yenye michepuo mbalimbali, ikiwaandaa vijana kwa elimu ya juu.</p>
-          <span class="pill green">Kidato cha V na VI</span>
+          <img class="adm-img" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" alt="Wanafunzi wa A-Level maktabani">
+          <div class="adm-box-body">
+            <div class="icon">🎓</div>
+            <h4>A-Level (Kidato cha 5 - 6)</h4>
+            <p>Elimu ya kidato cha tano na sita yenye michepuo mbalimbali, ikiwaandaa vijana kwa elimu ya juu.</p>
+            <span class="pill green">Kidato cha V na VI</span>
+          </div>
         </div>
       </div>
 
@@ -440,50 +452,81 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     // --- 1. SEHEMU YA HERO IMAGE SLIDER (Mishale na Picha) ---
     const heroSection = document.getElementById('home');
     const slideLeftBtn = document.getElementById('slide-left');
     const slideRightBtn = document.getElementById('slide-right');
 
-    // Orodha ya picha nzuri zinazopishana (Unaweza kuzibadilisha linki hizi baadaye)
-    const heroImages = [
-        'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop', // Darasa
-        'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop', // Wanafunzi wakisoma
-        'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop'  // Mazingira/Graduation
+    const heroBadgeEl = document.querySelector('.hero-badge');
+    const heroTitleEl = document.querySelector('.hero-content h1');
+    const heroTextEl = document.querySelector('.hero-content p');
+
+    const heroSlides = [
+        {
+            image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop',
+            fit: 'cover',
+            badge: '🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA',
+            title: 'Elimu, Nidhamu, na Maadili',
+            text: 'Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.'
+        },
+        {
+            image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop',
+            fit: 'cover',
+            badge: '🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA',
+            title: 'Elimu, Nidhamu, na Maadili',
+            text: 'Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.'
+        },
+        {
+            image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop',
+            fit: 'cover',
+            badge: '🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA',
+            title: 'Elimu, Nidhamu, na Maadili',
+            text: 'Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.'
+        },
+        {
+            image: 'images/cheti-fizikia-2024.png',
+            fit: 'contain',
+            badge: '🏆 MSHINDI WA KWANZA KITAIFA - FIZIKIA CSEE 2024',
+            title: 'Fahari Yetu: Aron Weisy Wikedzi',
+            text: 'Alitunukiwa cheti na Mamlaka ya Maabara ya Mkemia Mkuu wa Serikali kama mshindi wa kwanza kitaifa katika somo la Fizikia, CSEE 2024.'
+        }
     ];
 
     let currentSlide = 0;
 
-    // Kazi ya kubadilisha muonekano wa Background
     function updateHeroBackground() {
-        // Hili giza linasaidia maandishi (Elimu, Nidhamu..) yasomeke vizuri juu ya picha yoyote
-        const overlay = 'linear-gradient(180deg, rgba(10,25,50,.15) 0%, rgba(8,20,42,.55) 100%)';
-        heroSection.style.background = `${overlay}, url('${heroImages[currentSlide]}') center/cover no-repeat`;
+        const slide = heroSlides[currentSlide];
+        const overlay = slide.fit === 'contain'
+            ? 'linear-gradient(180deg, rgba(10,25,50,.55) 0%, rgba(8,20,42,.75) 100%)'
+            : 'linear-gradient(180deg, rgba(10,25,50,.15) 0%, rgba(8,20,42,.55) 100%)';
+        heroSection.style.background = `${overlay}, url('${slide.image}') center/${slide.fit} no-repeat`;
+        heroSection.style.backgroundColor = slide.fit === 'contain' ? '#0c2c53' : 'transparent';
+
+        heroBadgeEl.textContent = slide.badge;
+        heroTitleEl.textContent = slide.title;
+        heroTextEl.textContent = slide.text;
     }
 
-    // Mshale wa Kushoto
     slideLeftBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide === 0) ? heroImages.length - 1 : currentSlide - 1;
+        currentSlide = (currentSlide === 0) ? heroSlides.length - 1 : currentSlide - 1;
         updateHeroBackground();
     });
 
-    // Mshale wa Kulia
     slideRightBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide === heroImages.length - 1) ? 0 : currentSlide + 1;
+        currentSlide = (currentSlide === heroSlides.length - 1) ? 0 : currentSlide + 1;
         updateHeroBackground();
     });
 
-    // Ifanye ijibadilishe yenyewe kila baada ya sekunde 5 (5000ms)
     setInterval(() => {
-        currentSlide = (currentSlide === heroImages.length - 1) ? 0 : currentSlide + 1;
+        currentSlide = (currentSlide === heroSlides.length - 1) ? 0 : currentSlide + 1;
         updateHeroBackground();
     }, 5000);
 
 
-    // --- 2. SEHEMU YA TESTIMONIALS API (Kama Kawaida) ---
+    // --- 2. SEHEMU YA TESTIMONIALS API (na avatar za picha) ---
     const container = document.getElementById('testimonials-container');
-    const apiUrl = 'https://umawanjo.ac.tz/umawanjo/api.php'; 
+    const apiUrl = 'https://umawanjo.ac.tz/umawanjo/api.php';
 
     fetch(apiUrl)
         .then(response => response.json())
@@ -492,11 +535,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 let htmlContent = '';
                 data.forEach(item => {
                     let rangi = item.rangi_nukuu ? item.rangi_nukuu : 'var(--gold)';
+                    let avatarHTML = item.picha
+                        ? `<img src="${item.picha}" alt="${item.jina}">`
+                        : item.jina.charAt(0).toUpperCase();
+
                     htmlContent += `
                       <div class="test-card">
                         <div class="test-top">
                           <div class="test-person">
-                            <div class="avatar">👤</div>
+                            <div class="avatar">${avatarHTML}</div>
                             <div>
                               <h5>${item.jina}</h5>
                               <span>${item.cheo}</span>
