@@ -67,6 +67,7 @@
       url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop')
       center/cover no-repeat;
     display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;
+    transition: background 0.8s ease-in-out; /* Kuweka muonekano mwororo wakati picha inabadilika */
   }
   .hero-content{max-width:720px;padding:0 24px;}
   .hero-badge{
@@ -83,7 +84,10 @@
     width:42px;height:42px;border-radius:50%;
     background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);
     color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;
+    transition: background 0.3s;
+    z-index: 10;
   }
+  .hero-arrow:hover { background: rgba(255,255,255,.35); }
   .hero-arrow.left{left:24px;} .hero-arrow.right{right:24px;}
   .hero-dot{
     position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
@@ -277,13 +281,17 @@
 </header>
 
 <section class="hero" id="home">
-  <div class="hero-arrow left">&#8249;</div>
+  <!-- Tumeongeza vitambulisho (IDs) kwenye mishale ili JS iweze kuzitambua -->
+  <div class="hero-arrow left" id="slide-left">&#8249;</div>
+  
   <div class="hero-content">
     <div class="hero-badge">🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA</div>
     <h1>Elimu, Nidhamu, na Maadili</h1>
     <p>Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.</p>
   </div>
-  <div class="hero-arrow right">&#8250;</div>
+  
+  <!-- Tumeongeza kitambulisho (ID) hapa pia -->
+  <div class="hero-arrow right" id="slide-right">&#8250;</div>
   <div class="hero-dot">❙</div>
 </section>
 
@@ -376,7 +384,6 @@
       <p>Mafanikio ya vijana wetu na ushirikiano tunaopata kutoka kwa wazazi ndio uthibitisho wetu mkuu wa ubora wa elimu tunayotoa.</p>
     </div>
 
-    <!-- Hapa ndipo maoni yataingia kwa njia ya JavaScript -->
     <div class="test-grid" id="testimonials-container">
       <p style='grid-column: 1 / -1; text-align: center; color: var(--muted);'>Inapakia maoni kutoka kwenye kanzidata...</p>
     </div>
@@ -431,12 +438,51 @@
   </div>
 </footer>
 
-<!-- SCRIPT YA KUUNGANISHA GITHUB NA CPANEL YAKO -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('testimonials-container');
     
-    // Hii ni URL ya faili lako uliloweka kule cPanel
+    // --- 1. SEHEMU YA HERO IMAGE SLIDER (Mishale na Picha) ---
+    const heroSection = document.getElementById('home');
+    const slideLeftBtn = document.getElementById('slide-left');
+    const slideRightBtn = document.getElementById('slide-right');
+
+    // Orodha ya picha nzuri zinazopishana (Unaweza kuzibadilisha linki hizi baadaye)
+    const heroImages = [
+        'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop', // Darasa
+        'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop', // Wanafunzi wakisoma
+        'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop'  // Mazingira/Graduation
+    ];
+
+    let currentSlide = 0;
+
+    // Kazi ya kubadilisha muonekano wa Background
+    function updateHeroBackground() {
+        // Hili giza linasaidia maandishi (Elimu, Nidhamu..) yasomeke vizuri juu ya picha yoyote
+        const overlay = 'linear-gradient(180deg, rgba(10,25,50,.15) 0%, rgba(8,20,42,.55) 100%)';
+        heroSection.style.background = `${overlay}, url('${heroImages[currentSlide]}') center/cover no-repeat`;
+    }
+
+    // Mshale wa Kushoto
+    slideLeftBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide === 0) ? heroImages.length - 1 : currentSlide - 1;
+        updateHeroBackground();
+    });
+
+    // Mshale wa Kulia
+    slideRightBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide === heroImages.length - 1) ? 0 : currentSlide + 1;
+        updateHeroBackground();
+    });
+
+    // Ifanye ijibadilishe yenyewe kila baada ya sekunde 5 (5000ms)
+    setInterval(() => {
+        currentSlide = (currentSlide === heroImages.length - 1) ? 0 : currentSlide + 1;
+        updateHeroBackground();
+    }, 5000);
+
+
+    // --- 2. SEHEMU YA TESTIMONIALS API (Kama Kawaida) ---
+    const container = document.getElementById('testimonials-container');
     const apiUrl = 'https://umawanjo.ac.tz/umawanjo/api.php'; 
 
     fetch(apiUrl)
@@ -445,9 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(data.length > 0) {
                 let htmlContent = '';
                 data.forEach(item => {
-                    // Weka default rangi kama haipo kwenye database
                     let rangi = item.rangi_nukuu ? item.rangi_nukuu : 'var(--gold)';
-                    
                     htmlContent += `
                       <div class="test-card">
                         <div class="test-top">
