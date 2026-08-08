@@ -466,6 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop',
             fit: 'cover',
+            hideText: false,
             badge: '🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA',
             title: 'Elimu, Nidhamu, na Maadili',
             text: 'Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.'
@@ -473,6 +474,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop',
             fit: 'cover',
+            hideText: false,
             badge: '🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA',
             title: 'Elimu, Nidhamu, na Maadili',
             text: 'Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.'
@@ -480,6 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1600&auto=format&fit=crop',
             fit: 'cover',
+            hideText: false,
             badge: '🎓 USAJILI WA WANAFUNZI WAPYA 2026 UMEANZA',
             title: 'Elimu, Nidhamu, na Maadili',
             text: 'Jiandae kwa mwaka mpya wa masomo na fursa za kipekee kwa vijana wa kiume kujijenga kitaaluma.'
@@ -487,9 +490,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             image: 'cheti-fizikia-2024.png',
             fit: 'contain',
-            badge: '🏆 MSHINDI WA KWANZA KITAIFA - FIZIKIA CSEE 2024',
-            title: 'Fahari Yetu: Aron Weisy Wikedzi',
-            text: 'Alitunukiwa cheti na Mamlaka ya Maabara ya Mkemia Mkuu wa Serikali kama mshindi wa kwanza kitaifa katika somo la Fizikia, CSEE 2024.'
+            hideText: true // Hii inaficha maandishi yote ili picha ya cheti ionekane safi kabisa
         }
     ];
 
@@ -498,14 +499,24 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateHeroBackground() {
         const slide = heroSlides[currentSlide];
         const overlay = slide.fit === 'contain'
-            ? 'linear-gradient(180deg, rgba(10,25,50,.55) 0%, rgba(8,20,42,.75) 100%)'
+            ? 'linear-gradient(180deg, rgba(10,25,50,.2) 0%, rgba(8,20,42,.4) 100%)'
             : 'linear-gradient(180deg, rgba(10,25,50,.15) 0%, rgba(8,20,42,.55) 100%)';
+        
         heroSection.style.background = `${overlay}, url('${slide.image}') center/${slide.fit} no-repeat`;
         heroSection.style.backgroundColor = slide.fit === 'contain' ? '#0c2c53' : 'transparent';
 
-        heroBadgeEl.textContent = slide.badge;
-        heroTitleEl.textContent = slide.title;
-        heroTextEl.textContent = slide.text;
+        if (slide.hideText) {
+            heroBadgeEl.style.display = 'none';
+            heroTitleEl.style.display = 'none';
+            heroTextEl.style.display = 'none';
+        } else {
+            heroBadgeEl.style.display = 'inline-flex';
+            heroTitleEl.style.display = 'block';
+            heroTextEl.style.display = 'block';
+            heroBadgeEl.textContent = slide.badge;
+            heroTitleEl.textContent = slide.title;
+            heroTextEl.textContent = slide.text;
+        }
     }
 
     slideLeftBtn.addEventListener('click', () => {
