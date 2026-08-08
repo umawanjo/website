@@ -382,51 +382,59 @@
     </div>
 
     <div class="test-grid">
-      <div class="test-card">
-        <div class="test-top">
-          <div class="test-person">
-            <div class="avatar">👤</div>
-            <div>
-              <h5>Baraka J.</h5>
-              <span>Mwanafunzi - Kidato cha 4</span>
-            </div>
-          </div>
-          <div class="quote-mark" style="background:var(--gold);">”</div>
-        </div>
-        <div class="stars">★★★★★</div>
-        <p>"Mazingira ya Umawanjo Boys yanatupa utulivu wa kusoma. Walimu wako karibu nasi usiku na mchana kuhakikisha tunaelewa."</p>
-      </div>
+      <?php
+      // 1. Connection ya Database (Badilisha hizi taarifa kulingana na server yako)
+      $host = 'localhost';
+      $db   = 'jina_la_database';
+      $user = 'jina_la_user';
+      $pass = 'password_yako';
 
-      <div class="test-card">
-        <div class="test-top">
-          <div class="test-person">
-            <div class="avatar">👤</div>
-            <div>
-              <h5>Paulo M.</h5>
-              <span>Mzazi wa Mwanafunzi</span>
-            </div>
-          </div>
-          <div class="quote-mark" style="background:var(--green);">”</div>
-        </div>
-        <div class="stars">★★★★★</div>
-        <p>"Nimeona mabadiliko makubwa sana ya kinidhamu na ufaulu tangu nimlete kijana wangu hapa. Shule ina usimamizi thabiti sana."</p>
-      </div>
+      try {
+          $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          
+          // 2. Vuta maoni kutoka kwenye database (Unaweza ku-limit 3 za mwisho)
+          $stmt = $pdo->query("SELECT * FROM testimonials ORDER BY id DESC LIMIT 3");
+          $testimonials = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-      <div class="test-card">
-        <div class="test-top">
-          <div class="test-person">
-            <div class="avatar">👤</div>
-            <div>
-              <h5>Mzee Chacha.</h5>
-              <span>Mzazi wa mwanafunzi</span>
-            </div>
-          </div>
-          <div class="quote-mark" style="background:var(--navy);">”</div>
-        </div>
-        <div class="stars">★★★★★</div>
-        <p>"Umawanjo inajenga vijana wanaojitegemea. Ufuatiliaji wao wa kitaaluma unanipa amani kama mzazi kwamba mtoto wangu yuko mikono salama."</p>
-      </div>
+          // 3. Loop (Zungusha) kutengeneza kadi za HTML
+          if ($testimonials) {
+              foreach ($testimonials as $row) {
+                  $jina = htmlspecialchars($row['jina']);
+                  $cheo = htmlspecialchars($row['cheo']);
+                  $maoni = htmlspecialchars($row['maoni']);
+                  $rangi = htmlspecialchars($row['rangi_nukuu']);
+                  ?>
+                  
+                  <div class="test-card">
+                    <div class="test-top">
+                      <div class="test-person">
+                        <div class="avatar">👤</div>
+                        <div>
+                          <h5><?php echo $jina; ?></h5>
+                          <span><?php echo $cheo; ?></span>
+                        </div>
+                      </div>
+                      <div class="quote-mark" style="background:<?php echo $rangi; ?>;">”</div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>"<?php echo $maoni; ?>"</p>
+                  </div>
+
+                  <?php
+              }
+          } else {
+              // Kama hakuna data kwenye table, onyesha ujumbe au data za kuanzia
+              echo "<p style='grid-column: 1 / -1; text-align: center; color: var(--muted);'>Hakuna maoni yaliyowekwa kwa sasa.</p>";
+          }
+
+      } catch (PDOException $e) {
+          // Ikiwa kuna shida ya ku-connect, onyesha kosa kiufundi
+          echo "<p style='grid-column: 1 / -1; text-align: center; color: red;'>Tatizo la kuunganisha Database: " . $e->getMessage() . "</p>";
+      }
+      ?>
     </div>
+
   </div>
 </section>
 
