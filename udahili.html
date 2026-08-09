@@ -1,1 +1,362 @@
-udahili.html
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Udahili | UMAWANJO Boys' Secondary School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#123a6b;
+    --navy-dark:#0c2c53;
+    --green:#2ea767;
+    --green-dark:#1f8b53;
+    --cream:#f7f8fa;
+    --ink:#16233a;
+    --muted:#5c6b83;
+    --gold:#e0a63a;
+    --line:#e6eaf1;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:#fff;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif;}
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1200px;margin:0 auto;position:relative;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;}
+  .brand .logo{
+    width:40px;height:40px;border-radius:10px;
+    background:linear-gradient(135deg,var(--navy),var(--green));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;
+  }
+  .brand-text{line-height:1.2;}
+  .brand-text .sub{font-size:11px;color:var(--muted);font-weight:500;}
+  
+  .nav-links{display:flex;gap:28px;font-weight:500;font-size:14.5px;color:var(--ink);align-items:center;}
+  .nav-links a{opacity:.85;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;color:var(--green-dark);}
+  .nav-links a.active {opacity:1; color:var(--green-dark); font-weight: 700; border-bottom: 2px solid var(--green-dark);}
+  
+  .nav-cta{
+    background:var(--navy);color:#fff;padding:10px 20px;border-radius:30px;font-weight:600;font-size:14px;
+  }
+
+  /* Kitufe cha Menu kwenye Simu */
+  .menu-toggle{
+    display:none;font-size:26px;cursor:pointer;background:none;border:none;color:var(--navy);
+  }
+
+  @media(max-width:900px){
+    .menu-toggle{display:block;}
+    .nav-links{
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:100%;left:0;width:100%;
+      background:#fff;
+      padding:24px;
+      border-bottom:1px solid var(--line);
+      box-shadow:0 10px 25px rgba(0,0,0,0.06);
+      gap:18px;
+    }
+    .nav-links.active{display:flex;}
+    .nav-cta{display:none;} 
+  }
+
+  /* PAGE HERO */
+  .page-hero{
+    height: 35vh; min-height: 250px;
+    background: linear-gradient(180deg, rgba(10,25,50,.6) 0%, rgba(8,20,42,.8) 100%),
+                url('https://images.unsplash.com/photo-1522881113591-b54f24af81a1?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;
+  }
+  .page-hero h1 {font-size: 42px; font-weight: 800; margin-bottom: 10px;}
+  .page-hero p {font-size: 16px; color: rgba(255,255,255,.9); max-width: 600px; margin: 0 auto;}
+  
+  /* SECTION LABELS */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);padding:7px 18px;border-radius:30px;
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;color:var(--navy);
+    margin-bottom:18px;
+  }
+  .section{padding:88px 0;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 56px auto;}
+  .section-head h2{font-size:36px;font-weight:800;color:var(--ink);margin-bottom:14px;}
+  .section-head h2 .accent{color:var(--green-dark);}
+  .section-head p{color:var(--muted);font-size:15.5px;}
+
+  /* ADMISSIONS STYLES */
+  .adm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 64px; }
+  .adm-box{
+    border:1px solid var(--line);border-radius:14px;overflow:hidden; background: #fff;
+    box-shadow:0 10px 30px rgba(18,58,107,.04);
+  }
+  .adm-box .adm-img{
+    width:100%;height:220px;object-fit:cover;
+  }
+  .adm-box .adm-box-body{
+    padding:32px;
+  }
+  .adm-box h4{font-size:20px;margin-bottom:12px; color: var(--navy);}
+  .adm-box p{font-size:14.5px;color:var(--muted);margin-bottom:16px; line-height: 1.7;}
+  .pill{
+    display:inline-block;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;
+  }
+  .pill.blue{background:#e8f0fd;color:var(--navy);}
+  .pill.green{background:#e5f7ec;color:var(--green-dark);}
+  
+  .req-list { margin-top: 16px; margin-bottom: 24px; padding-left: 20px;}
+  .req-list li { font-size: 14px; color: var(--muted); margin-bottom: 8px; list-style-type: disc;}
+
+  /* STEPS */
+  .steps-container { background: var(--cream); border-radius: var(--radius); padding: 56px 40px; border: 1px solid var(--line);}
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .step-card { background: #fff; padding: 32px; border-radius: 12px; text-align: center; border: 1px solid var(--line); position: relative;}
+  .step-number { 
+    width: 40px; height: 40px; background: var(--green); color: #fff; font-weight: 800; font-size: 18px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto;
+  }
+  .step-card h5 { font-size: 16px; margin-bottom: 10px; color: var(--navy); }
+  .step-card p { font-size: 13.5px; color: var(--muted); }
+
+  .cta-gradient{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(90deg,var(--navy),var(--green));
+    color:#fff;padding:16px 32px;border-radius:12px;font-weight:700;font-size:15px;
+    border:none;cursor:pointer; margin-top: 40px;
+  }
+
+  @media(max-width:800px){
+    .adm-grid, .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+    .steps-container { padding: 40px 24px; }
+  }
+
+  /* FOOTER */
+  footer{background:var(--navy-dark);color:#cfd9ec;padding:64px 0 0 0;}
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:44px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .foot-brand .logo{
+    width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--navy));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;
+  }
+  .foot-brand-text{line-height:1.2;}
+  .foot-brand-text strong{color:#fff;font-size:15px;}
+  .foot-brand-text span{font-size:11px;color:#9fb0cc;}
+  footer p.tag{font-size:13.5px;color:#a9b8d4;margin-bottom:16px;}
+  .foot-social{display:flex;gap:10px;}
+  .foot-social a{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  footer h6{color:#fff;font-size:14.5px;margin-bottom:16px;}
+  footer ul li{margin-bottom:10px;font-size:13.8px;color:#aebbd6;}
+  footer ul li a:hover{color:#fff;}
+  .foot-contact li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#aebbd6;margin-bottom:14px;}
+  .bottom-bar{
+    text-align:center;padding:22px 0;font-size:12.5px;color:#8496b8;
+  }
+  @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.foot-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="logo">U</div>
+      <div class="brand-text">
+        UMAWANJO<br>
+        <span class="sub">Boys' Secondary School</span>
+      </div>
+    </div>
+    
+    <button class="menu-toggle" id="mobile-menu-btn">☰</button>
+
+    <nav class="nav-links" id="nav-links-menu">
+      <a href="index.html">Mwanzo</a>
+      <a href="about.html">Kuhusu Sisi</a>
+      <a href="taaluma.html">Taaluma</a>
+      <!-- Hii link inawaka kuonyesha tupo ukurasa wa Udahili -->
+      <a href="udahili.html" class="active">Udahili</a>
+      <a href="#contact">Mawasiliano</a>
+    </nav>
+    
+    <a href="udahili.html" class="nav-cta">Omba Nafasi</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Udahili na Usajili</h1>
+    <p>Karibu kujiunga na Umawanjo Boys. Hapa ndipo safari ya mafanikio yako ya kitaaluma inapoanzia.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    
+    <div class="section-head">
+      <span class="eyebrow">🎓 NAFASI ZILIZOPO 🎓</span>
+      <h2>Sifa za <span class="accent">Kujiunga</span></h2>
+      <p>Tunapokea maombi ya kujiunga kwa wanafunzi wenye sifa na utayari wa kusoma kwa bidii.</p>
+    </div>
+
+    <div class="adm-grid">
+      <!-- O-Level Admission -->
+      <div class="adm-box">
+        <img class="adm-img" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" alt="Wanafunzi wa O-Level darasani">
+        <div class="adm-box-body">
+          <span class="pill blue" style="margin-bottom: 12px;">Kidato cha I hadi IV</span>
+          <h4>O-Level (Kidato cha 1 - 4)</h4>
+          <p>Tofauti na shule zingine, tunatoa msingi thabiti kwa wanafunzi wanaoanza elimu ya sekondari ili kuwajenga kisaikolojia na kitaaluma.</p>
+          <ul class="req-list">
+            <li>Awe amehitimu Elimu ya Msingi (Darasa la Saba).</li>
+            <li>Awe na ufaulu mzuri kwenye mtihani wa Taifa.</li>
+            <li>Awe tayari kufanya mtihani wetu wa mchujo (Pre-Form One / Interview).</li>
+          </ul>
+          <a href="#wasiliana" style="color: var(--navy); font-weight: 600; font-size: 14px;">Uliza kuhusu Fomu ya Form I &rarr;</a>
+        </div>
+      </div>
+
+      <!-- A-Level Admission -->
+      <div class="adm-box">
+        <img class="adm-img" src="https://images.unsplash.com/photo-1531104985437-602d73af45eb?q=80&w=800&auto=format&fit=crop" alt="Wanafunzi wa A-Level maktabani">
+        <div class="adm-box-body">
+          <span class="pill green" style="margin-bottom: 12px;">Kidato cha V na VI</span>
+          <h4>A-Level (Kidato cha 5 - 6)</h4>
+          <p>Kujiunga na kidato cha tano kunahitaji ufaulu mkubwa. Tunapokea wanafunzi kwa michepuo yote ya Sayansi, Biashara, na Sanaa.</p>
+          <ul class="req-list">
+            <li>Awe amehitimu Kidato cha Nne (CSEE).</li>
+            <li>Awe na ufaulu wa madaraja (Division I - III) yanayomruhusu kusoma mchepuo husika.</li>
+            <li>Barua ya utambulisho kutoka shule aliyotoka (Leaving Certificate).</li>
+          </ul>
+          <a href="#wasiliana" style="color: var(--green-dark); font-weight: 600; font-size: 14px;">Uliza kuhusu Fomu ya Form V &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hatua za Kujiunga -->
+    <div class="steps-container" id="wasiliana">
+      <div class="section-head" style="margin-bottom: 40px;">
+        <h2>Hatua za <span class="accent">Kufanya Maombi</span></h2>
+        <p>Fuata hatua hizi tatu rahisi ili kukamilisha usajili wa mwanafunzi.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h5>Chukua Fomu</h5>
+          <p>Wasiliana nasi au fika shuleni kuchukua fomu ya maombi (Joining Instructions) na kujaza taarifa zote zinazohitajika kwa usahihi.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h5>Lipa Ada/Malipo ya Awali</h5>
+          <p>Fanya malipo kwenye akaunti za shule kama ilivyoelekezwa kwenye fomu. Hakikisha unatunza risiti ya benki.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h5>Ripoti Shuleni</h5>
+          <p>Fika shuleni siku ya kufungua ukiwa na mahitaji yote muhimu, fomu iliyojazwa, na risiti ya malipo ili kukamilisha usajili wako.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="cta-gradient" onclick="window.location.href='#contact'">📞 Piga Simu Kuomba Fomu / Maelezo</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <div class="logo">U</div>
+          <div class="foot-brand-text">
+            <strong>UMAWANJO</strong><br>
+            <span>Boys' Secondary School</span>
+          </div>
+        </div>
+        <p class="tag">Elimu, Nidhamu, na Maadili.</p>
+        <div class="foot-social">
+          <a href="#">f</a><a href="#">𝕏</a><a href="#">◎</a><a href="#">in</a>
+        </div>
+      </div>
+      <div>
+        <h6>Viungo Muhimu</h6>
+        <ul>
+          <li><a href="index.html">Mwanzo</a></li>
+          <li><a href="about.html">Kuhusu Sisi</a></li>
+          <li><a href="taaluma.html">Taaluma (Matokeo)</a></li>
+          <li><a href="udahili.html">Udahili</a></li>
+          <li><a href="#contact">Mawasiliano</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Programu Zetu</h6>
+        <ul>
+          <li><a href="udahili.html">O-Level (Kidato cha 1-4)</a></li>
+          <li><a href="udahili.html">A-Level (Kidato cha 5-6)</a></li>
+          <li><a href="#">Michezo & Sanaa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Mawasiliano</h6>
+        <ul class="foot-contact">
+          <li>📍 Ludewa, Njombe, Tanzania</li>
+          <li>📞 +255 765 883 980<br>+255 737 663 181</li>
+          <li>✉️ info@umawanjoboys.ac.tz</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-bar">Imebuniwa na MifumoTech</div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // MOBILE MENU TOGGLE
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinksMenu = document.getElementById('nav-links-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinksMenu.classList.toggle('active');
+    });
+
+    navLinksMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinksMenu.classList.remove('active');
+        });
+    });
+});
+</script>
+
+</body>
+</html>
