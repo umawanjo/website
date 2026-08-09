@@ -1,1 +1,351 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taaluma | UMAWANJO Boys' Secondary School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#123a6b;
+    --navy-dark:#0c2c53;
+    --green:#2ea767;
+    --green-dark:#1f8b53;
+    --cream:#f7f8fa;
+    --ink:#16233a;
+    --muted:#5c6b83;
+    --gold:#e0a63a;
+    --line:#e6eaf1;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:#fff;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif;}
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px;}
 
+  /* NAV */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1200px;margin:0 auto;position:relative;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;}
+  .brand .logo{
+    width:40px;height:40px;border-radius:10px;
+    background:linear-gradient(135deg,var(--navy),var(--green));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;
+  }
+  .brand-text{line-height:1.2;}
+  .brand-text .sub{font-size:11px;color:var(--muted);font-weight:500;}
+  
+  .nav-links{display:flex;gap:28px;font-weight:500;font-size:14.5px;color:var(--ink);align-items:center;}
+  .nav-links a{opacity:.85;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;color:var(--green-dark);}
+  .nav-links a.active {opacity:1; color:var(--green-dark); font-weight: 700; border-bottom: 2px solid var(--green-dark);}
+  
+  .nav-cta{
+    background:var(--navy);color:#fff;padding:10px 20px;border-radius:30px;font-weight:600;font-size:14px;
+  }
+
+  /* Kitufe cha Menu kwenye Simu */
+  .menu-toggle{
+    display:none;font-size:26px;cursor:pointer;background:none;border:none;color:var(--navy);
+  }
+
+  @media(max-width:900px){
+    .menu-toggle{display:block;}
+    .nav-links{
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:100%;left:0;width:100%;
+      background:#fff;
+      padding:24px;
+      border-bottom:1px solid var(--line);
+      box-shadow:0 10px 25px rgba(0,0,0,0.06);
+      gap:18px;
+    }
+    .nav-links.active{display:flex;}
+    .nav-cta{display:none;} 
+  }
+
+  /* PAGE HERO */
+  .page-hero{
+    height: 35vh; min-height: 250px;
+    background: linear-gradient(180deg, rgba(10,25,50,.6) 0%, rgba(8,20,42,.8) 100%),
+                url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;
+  }
+  .page-hero h1 {font-size: 42px; font-weight: 800; margin-bottom: 10px;}
+  .page-hero p {font-size: 16px; color: rgba(255,255,255,.9); max-width: 600px; margin: 0 auto;}
+  
+  /* SECTION LABELS */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);padding:7px 18px;border-radius:30px;
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;color:var(--navy);
+    margin-bottom:18px;
+  }
+  .section{padding:88px 0;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 56px auto;}
+  .section-head h2{font-size:36px;font-weight:800;color:var(--ink);margin-bottom:14px;}
+  .section-head h2 .accent{color:var(--green-dark);}
+  .section-head p{color:var(--muted);font-size:15.5px;}
+
+  /* ACADEMICS CONTENT */
+  .curriculum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 64px; }
+  .curr-card { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px; }
+  .curr-card h3 { font-size: 24px; margin-bottom: 16px; color: var(--navy); display: flex; align-items: center; gap: 12px; }
+  .curr-card p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+  .subject-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .subject-list li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 500; }
+  .subject-list li::before { content: '✓'; color: var(--green-dark); font-weight: bold; background: #e5f7ec; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+  /* ACHIEVEMENTS */
+  .achievement-box {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 48px;
+    box-shadow: 0 20px 50px rgba(18,58,107,.06); display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center;
+  }
+  .ach-img-container { background: var(--navy-dark); padding: 16px; border-radius: 12px; text-align: center; }
+  .ach-img-container img { width: 100%; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,.2); }
+  .ach-text h3 { font-size: 28px; margin-bottom: 16px; line-height: 1.3; }
+  .ach-text p { color: var(--muted); font-size: 15.5px; margin-bottom: 20px; line-height: 1.8; }
+  
+  .stat-highlight { display: flex; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .stat-item h4 { font-size: 32px; color: var(--green-dark); font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .stat-item span { font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  @media(max-width:800px){
+    .curriculum-grid, .achievement-box { grid-template-columns: 1fr; gap: 32px; }
+    .achievement-box { padding: 32px 24px; }
+  }
+  @media(max-width:500px){
+    .subject-list { grid-template-columns: 1fr; }
+  }
+
+  /* FOOTER */
+  footer{background:var(--navy-dark);color:#cfd9ec;padding:64px 0 0 0;}
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:44px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .foot-brand .logo{
+    width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--navy));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;
+  }
+  .foot-brand-text{line-height:1.2;}
+  .foot-brand-text strong{color:#fff;font-size:15px;}
+  .foot-brand-text span{font-size:11px;color:#9fb0cc;}
+  footer p.tag{font-size:13.5px;color:#a9b8d4;margin-bottom:16px;}
+  .foot-social{display:flex;gap:10px;}
+  .foot-social a{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  footer h6{color:#fff;font-size:14.5px;margin-bottom:16px;}
+  footer ul li{margin-bottom:10px;font-size:13.8px;color:#aebbd6;}
+  footer ul li a:hover{color:#fff;}
+  .foot-contact li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#aebbd6;margin-bottom:14px;}
+  .bottom-bar{
+    text-align:center;padding:22px 0;font-size:12.5px;color:#8496b8;
+  }
+  @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.foot-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="logo">U</div>
+      <div class="brand-text">
+        UMAWANJO<br>
+        <span class="sub">Boys' Secondary School</span>
+      </div>
+    </div>
+    
+    <button class="menu-toggle" id="mobile-menu-btn">☰</button>
+
+    <nav class="nav-links" id="nav-links-menu">
+      <a href="index.html">Mwanzo</a>
+      <a href="about.html">Kuhusu Sisi</a>
+      <!-- Link hii inawaka kuonyesha tupo ukurasa wa Taaluma -->
+      <a href="taaluma.html" class="active">Taaluma</a>
+      <a href="index.html#admissions">Udahili</a>
+      <a href="#contact">Mawasiliano</a>
+    </nav>
+    
+    <a href="index.html#admissions" class="nav-cta">Omba Nafasi</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Taaluma na Matokeo</h1>
+    <p>Tunajivunia ubora wa elimu na ufaulu wa hali ya juu unaowafanya wanafunzi wetu kung'ara kitaifa.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    
+    <div class="section-head">
+      <span class="eyebrow">📚 MTAALA WETU 📚</span>
+      <h2>Masomo <span class="accent">Yanayofundishwa</span></h2>
+      <p>Tunatoa elimu inayofuata mtaala wa Taifa (NECTA) huku tukisisitiza uelewa wa kina kwenye masomo ya Sayansi, Biashara, na Sanaa.</p>
+    </div>
+
+    <div class="curriculum-grid">
+      <!-- O-Level -->
+      <div class="curr-card">
+        <h3><span>📖</span> O-Level (Kidato cha I - IV)</h3>
+        <p>Wanafunzi wanajengewa msingi imara kupitia masomo ya lazima na ya kuchagua kulingana na vipaji vyao.</p>
+        <ul class="subject-list">
+          <li>Fizikia (Physics)</li>
+          <li>Kemia (Chemistry)</li>
+          <li>Biolojia (Biology)</li>
+          <li>Hisabati (Basic Math)</li>
+          <li>Jiografia (Geography)</li>
+          <li>Historia (History)</li>
+          <li>Kiingereza (English)</li>
+          <li>Kiswahili</li>
+          <li>Uraia (Civics)</li>
+          <li>Biashara (Commerce)</li>
+          <li>Uhasibu (Book Keeping)</li>
+        </ul>
+      </div>
+
+      <!-- A-Level -->
+      <div class="curr-card">
+        <h3><span>🎓</span> A-Level (Kidato cha V - VI)</h3>
+        <p>Tunatoa michepuo (combinations) inayoandaa wanafunzi kuwa wataalamu mahiri katika vyuo vikuu.</p>
+        <ul class="subject-list">
+          <li>PCB (Physics, Chem, Bio)</li>
+          <li>PCM (Physics, Chem, Math)</li>
+          <li>CBG (Chem, Bio, Geog)</li>
+          <li>EGM (Econ, Geog, Math)</li>
+          <li>HGL (Hist, Geog, Lang)</li>
+          <li>HGK (Hist, Geog, Kisw)</li>
+          <li>HKL (Hist, Kisw, Lang)</li>
+          <li>General Studies (GS)</li>
+          <li>BAM (Basic Applied Math)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Mafanikio -->
+    <div class="section-head" style="margin-top: 64px;">
+      <span class="eyebrow">🏆 REKODI ZETU 🏆</span>
+      <h2>Matokeo na <span class="accent">Mafanikio</span></h2>
+      <p>Kila mwaka, wanafunzi wetu wamekuwa wakifanya vizuri sana kwenye mitihani ya Taifa na kutuletea heshima kubwa.</p>
+    </div>
+
+    <div class="achievement-box">
+      <div class="ach-img-container">
+        <!-- Picha ya cheti cha Aron inatumika hapa -->
+        <img src="cheti-fizikia-2024.png" alt="Cheti cha Mshindi wa Kwanza Fizikia Taifa 2024">
+      </div>
+      <div class="ach-text">
+        <h3>Fahari Yetu: <span class="accent">Aron Weisy Wikedzi</span></h3>
+        <p>Historia iliandikwa mwaka 2024 pale mwanafunzi wetu, Aron Weisy Wikedzi, alipoibuka <strong>Mshindi wa Kwanza Kitaifa katika somo la Fizikia (CSEE 2024)</strong>. </p>
+        <p>Kutokana na umahiri huo, alitunukiwa cheti maalum na Mamlaka ya Maabara ya Mkemia Mkuu wa Serikali. Hii ni dhihirisho la ubora wa walimu wetu wa sayansi, uwepo wa maabara za kisasa, na juhudi za wanafunzi wetu.</p>
+        
+        <div class="stat-highlight">
+          <div class="stat-item">
+            <h4>#1</h4>
+            <span>Kitaifa Fizikia '24</span>
+          </div>
+          <div class="stat-item">
+            <h4>100%</h4>
+            <span>Ufaulu wa Daraja I - III</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <div class="logo">U</div>
+          <div class="foot-brand-text">
+            <strong>UMAWANJO</strong><br>
+            <span>Boys' Secondary School</span>
+          </div>
+        </div>
+        <p class="tag">Elimu, Nidhamu, na Maadili.</p>
+        <div class="foot-social">
+          <a href="#">f</a><a href="#">𝕏</a><a href="#">◎</a><a href="#">in</a>
+        </div>
+      </div>
+      <div>
+        <h6>Viungo Muhimu</h6>
+        <ul>
+          <li><a href="index.html">Mwanzo</a></li>
+          <li><a href="about.html">Kuhusu Sisi</a></li>
+          <li><a href="taaluma.html">Taaluma (Matokeo)</a></li>
+          <li><a href="index.html#admissions">Udahili</a></li>
+          <li><a href="#contact">Mawasiliano</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Programu Zetu</h6>
+        <ul>
+          <li><a href="index.html#admissions">O-Level (Kidato cha 1-4)</a></li>
+          <li><a href="index.html#admissions">A-Level (Kidato cha 5-6)</a></li>
+          <li><a href="#">Michezo & Sanaa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Mawasiliano</h6>
+        <ul class="foot-contact">
+          <li>📍 Ludewa, Njombe, Tanzania</li>
+          <li>📞 +255 765 883 980<br>+255 737 663 181</li>
+          <li>✉️ info@umawanjoboys.ac.tz</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-bar">Imebuniwa na MifumoTech</div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // MOBILE MENU TOGGLE
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinksMenu = document.getElementById('nav-links-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinksMenu.classList.toggle('active');
+    });
+
+    navLinksMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinksMenu.classList.remove('active');
+        });
+    });
+});
+</script>
+
+</body>
+</html>
